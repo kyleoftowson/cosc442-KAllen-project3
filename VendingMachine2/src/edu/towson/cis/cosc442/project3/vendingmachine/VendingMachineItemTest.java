@@ -26,7 +26,7 @@ public class VendingMachineItemTest {
 
 		VendingMachineItem result = new VendingMachineItem(name, price);
 
-		// add additional test code here
+		
 		assertNotNull(result);
 		assertEquals("", result.getName());
 		assertEquals(1.0, result.getPrice(), 1.0);
@@ -47,7 +47,7 @@ public class VendingMachineItemTest {
 
 		VendingMachineItem result = new VendingMachineItem(name, price);
 
-		// add additional test code here
+		
 		assertNotNull(result);
 	}
 
@@ -65,7 +65,7 @@ public class VendingMachineItemTest {
 
 		String result = fixture.getName();
 
-		// add additional test code here
+		
 		assertEquals("", result);
 	}
 
@@ -83,7 +83,7 @@ public class VendingMachineItemTest {
 
 		double result = fixture.getPrice();
 
-		// add additional test code here
+		
 		assertEquals(1.0, result, 0.1);
 	}
 
@@ -98,7 +98,7 @@ public class VendingMachineItemTest {
 	@Before
 	public void setUp()
 		throws Exception {
-		// add additional set up code here
+		
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class VendingMachineItemTest {
 	@After
 	public void tearDown()
 		throws Exception {
-		// Add additional tear down code here
+		
 	}
 
 	/**

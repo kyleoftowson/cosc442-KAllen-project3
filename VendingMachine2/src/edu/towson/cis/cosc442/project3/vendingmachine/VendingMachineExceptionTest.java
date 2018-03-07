@@ -46,7 +46,7 @@ public class VendingMachineExceptionTest {
 
 		VendingMachineException result = new VendingMachineException(reason);
 
-		// add additional test code here
+		
 		assertNotNull(result);
 		assertEquals(null, result.getCause());
 		assertEquals("edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineException: ", result.toString());
@@ -65,7 +65,7 @@ public class VendingMachineExceptionTest {
 	@Before
 	public void setUp()
 		throws Exception {
-		// add additional set up code here
+		
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class VendingMachineExceptionTest {
 	@After
 	public void tearDown()
 		throws Exception {
-		// Add additional tear down code here
+		
 	}
 
 	/**

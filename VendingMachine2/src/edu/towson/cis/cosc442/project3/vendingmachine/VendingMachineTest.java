@@ -24,7 +24,7 @@ public class VendingMachineTest {
 
 		VendingMachine result = new VendingMachine();
 
-		// add additional test code here
+		
 		assertNotNull(result);
 		assertEquals(0.0, result.returnChange(), 1.0);
 		assertEquals(0.0, result.getBalance(), 1.0);
@@ -43,7 +43,7 @@ public class VendingMachineTest {
 
 		VendingMachine result = new VendingMachine();
 
-		// add additional test code here
+		
 		assertNotNull(result);
 		assertEquals(0.0, result.returnChange(), 1.0);
 		assertEquals(0.0, result.getBalance(), 1.0);
@@ -66,8 +66,28 @@ public class VendingMachineTest {
 
 		fixture.addItem(item, code);
 
-		// add additional test code here
+		
 	}
+	
+	@Test
+	public void testAddItem_5()
+		throws Exception {
+	
+		vm.addItem(item, "A");
+		vm.addItem(item, "B");
+		assertTrue(vm.getItem("A").equals(item));
+		vm.addItem(item, "C");
+		vm.addItem(item, "D");
+		
+		try{
+		vm.addItem(item, "D");}
+		catch(Exception e){
+			assertTrue(true);
+		}
+		
+		
+	}
+	
 
 	/**
 	 * Run the void addItem(VendingMachineItem,String) method test.
@@ -86,7 +106,7 @@ public class VendingMachineTest {
 
 		fixture.addItem(item, code);
 
-		// add additional test code here
+		
 	}
 
 	/**
@@ -106,7 +126,7 @@ public class VendingMachineTest {
 
 		fixture.addItem(item, code);
 
-		// add additional test code here
+	
 	}
 
 	/**
@@ -124,7 +144,7 @@ public class VendingMachineTest {
 
 		double result = fixture.getBalance();
 
-		// add additional test code here
+	
 		assertEquals(1.0, result, 0.1);
 	}
 
@@ -144,7 +164,7 @@ public class VendingMachineTest {
 
 		VendingMachineItem result = fixture.getItem(code);
 
-		// add additional test code here
+		
 		assertEquals(null, result);
 	}
 
@@ -164,7 +184,7 @@ public class VendingMachineTest {
 
 		VendingMachineItem result = fixture.getItem(code);
 
-		// add additional test code here
+	
 		assertNotNull(result);
 	}
 
@@ -184,7 +204,7 @@ public class VendingMachineTest {
 
 		fixture.insertMoney(amount);
 
-		// add additional test code here
+	
 	}
 
 	/**
@@ -203,7 +223,7 @@ public class VendingMachineTest {
 
 		fixture.insertMoney(amount);
 
-		// add additional test code here
+
 	}
 
 	/**
@@ -222,7 +242,7 @@ public class VendingMachineTest {
 
 		boolean result = fixture.makePurchase(code);
 
-		// add additional test code here
+		
 		assertEquals(false, result);
 	}
 
@@ -242,7 +262,7 @@ public class VendingMachineTest {
 
 		boolean result = fixture.makePurchase(code);
 
-		// add additional test code here
+
 		assertEquals(false, result);
 	}
 
@@ -262,7 +282,7 @@ public class VendingMachineTest {
 
 		boolean result = fixture.makePurchase(code);
 
-		// add additional test code here
+	
 		assertEquals(false, result);
 	}
 
@@ -282,8 +302,17 @@ public class VendingMachineTest {
 
 		boolean result = fixture.makePurchase(code);
 
-		// add additional test code here
+	
 		assertTrue(result);
+	}
+	@Test
+	public void testMakePurchase_5()
+		throws Exception {
+		VendingMachineItem item1=new VendingMachineItem(null,10);
+		vm.addItem(item1, "C");
+		vm.balance=11;
+		boolean done=vm.makePurchase("C");
+		assertTrue(done);
 	}
 
 	/**
@@ -302,10 +331,17 @@ public class VendingMachineTest {
 
 		VendingMachineItem result = fixture.removeItem(code);
 
-		// add additional test code here
+	
 		assertNotNull(result);
 	}
+	@Test
+	public void testRemoveItem_5(){
+		vm.addItem(item, "A");
+		VendingMachineItem c=vm.removeItem("A");
+		assertTrue(c.equals(item));
+	}
 
+	
 	/**
 	 * Run the VendingMachineItem removeItem(String) method test.
 	 *
@@ -322,7 +358,7 @@ public class VendingMachineTest {
 
 		VendingMachineItem result = fixture.removeItem(code);
 
-		// add additional test code here
+
 		assertNotNull(result);
 	}
 
@@ -342,7 +378,7 @@ public class VendingMachineTest {
 
 		VendingMachineItem result = fixture.removeItem(code);
 
-		// add additional test code here
+		
 		assertNotNull(result);
 	}
 
@@ -361,7 +397,7 @@ public class VendingMachineTest {
 
 		double result = fixture.returnChange();
 
-		// add additional test code here
+		
 		assertEquals(1.0, result, 0.1);
 	}
 
@@ -376,9 +412,11 @@ public class VendingMachineTest {
 	@Before
 	public void setUp()
 		throws Exception {
-		// add additional set up code here
+		 vm=new VendingMachine();
+		item=new VendingMachineItem(null,0);
 	}
-
+	VendingMachine vm;
+	VendingMachineItem item;
 	/**
 	 * Perform post-test clean-up.
 	 *
@@ -390,7 +428,7 @@ public class VendingMachineTest {
 	@After
 	public void tearDown()
 		throws Exception {
-		// Add additional tear down code here
+	
 	}
 
 	/**

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VendingMachineTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">VendingMachineTests (Mar 7, 2018 9:13:07 AM)</a> &gt; <a href="../../index.html" class="el_group">VendingMachine</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">edu.towson.cis.cosc442.project3.vendingmachine</a> &gt; <span class="el_source">VendingMachineTest.java</span></div><h1>VendingMachineTest.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package edu.towson.cis.cosc442.project3.vendingmachine;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * @author Kyle
+ *
+ */
+<span class="fc" id="L16">public class VendingMachineTest {</span>
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	VendingMachine vm;
+	VendingMachine vm1;
+	VendingMachine vm2;
+	VendingMachine vm3;
+	VendingMachine vm4;
+	VendingMachineItem item;
+	VendingMachineItem item1;
+	VendingMachineItem item2;
+	VendingMachineItem item3;
+
+	@Before
+	public void setUp() throws Exception {
+<span class="fc" id="L33">		vm = new VendingMachine();</span>
+<span class="fc" id="L34">		vm1 = new VendingMachine();</span>
+<span class="fc" id="L35">		vm2 = new VendingMachine();</span>
+<span class="fc" id="L36">		vm3 = new VendingMachine();</span>
+<span class="fc" id="L37">		vm4 = new VendingMachine();</span>
+<span class="fc" id="L38">		item = new VendingMachineItem(null, 50);</span>
+<span class="fc" id="L39">		item1 = new VendingMachineItem(null, 1000);</span>
+<span class="fc" id="L40">		item2 = new VendingMachineItem(null, 300);</span>
+<span class="fc" id="L41">		item3 = new VendingMachineItem(null, 5);</span>
+
+<span class="fc" id="L43">	}</span>
+
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
+<span class="fc" id="L54">		item = null;</span>
+<span class="fc" id="L55">		item1 = null;</span>
+<span class="fc" id="L56">		item2 = null;</span>
+<span class="fc" id="L57">		item3 = null;</span>
+<span class="fc" id="L58">		vm = null;</span>
+<span class="fc" id="L59">		vm4 = null;</span>
+<span class="fc" id="L60">		vm3 = null;</span>
+<span class="fc" id="L61">		vm2 = null;</span>
+<span class="fc" id="L62">		vm1 = null;</span>
+<span class="fc" id="L63">	}</span>
+/**
+ * This tests if an invalid code is entered, and that it works normally as well.
+ */
+	@Test
+	public void testAddItem() {
+
+		// * Postcondition: The item is now at the slot specified by the code
+<span class="fc" id="L71">		vm.addItem(item, &quot;A&quot;);</span>
+<span class="fc" id="L72">		assertTrue(vm.getItem(&quot;A&quot;).equals(item));</span>
+		// Precondition: The slot specified by the code must be empty
+		// * 1. If you add an item to a slot that is already occupied.
+<span class="fc" id="L75">		vm1.addItem(item1, &quot;B&quot;);</span>
+		try {
+<span class="nc" id="L77">			vm1.addItem(item2, &quot;B&quot;);</span>
+<span class="pc" id="L78">		} catch (Exception e) {</span>
+<span class="fc" id="L79">			assertTrue(e.getMessage().equals(&quot;Slot &quot; + &quot;B&quot; + &quot; already occupied&quot;));</span>
+		}
+
+		// * 2. If you add an item with an invalid code
+		try {
+<span class="nc" id="L84">			vm3.addItem(item3, &quot;R&quot;);</span>
+<span class="pc" id="L85">		} catch (Exception e) {</span>
+<span class="fc" id="L86">			assertTrue(e.getMessage().equals(&quot;Invalid code for vending machine item&quot;));</span>
+		}
+
+<span class="fc" id="L89">	}</span>
+/**
+ * This tests when the item is removed with the wrong code, and the right code
+ * It tests if something is occupying the slot also.
+ */
+	@Test
+	public void testRemoveItem() {
+		// * Removes an item from the vending machine given its code.
+
+<span class="fc" id="L98">		vm.addItem(item, &quot;C&quot;);</span>
+<span class="fc" id="L99">		vm.removeItem(&quot;C&quot;);</span>
+		try {
+<span class="fc" id="L101">			vm.getItem(&quot;C&quot;);</span>
+<span class="pc" id="L102">		} catch (Exception e) {</span>
+<span class="nc" id="L103">			assertTrue(e.getMessage().equals(&quot;Invalid code for vending machine item&quot;));</span>
+
+		}
+		// * @return The item occupying the slot with the given code.
+<span class="fc" id="L107">		vm1.addItem(item2, &quot;D&quot;);</span>
+<span class="fc" id="L108">		assertTrue(vm1.removeItem(&quot;D&quot;).equals(item2));</span>
+		// If the slot at the specified code is empty
+		try {
+<span class="nc" id="L111">			vm2.removeItem(&quot;A&quot;);</span>
+<span class="pc" id="L112">		} catch (Exception e) {</span>
+<span class="fc" id="L113">			assertTrue(e.getMessage().equals(&quot;Slot &quot; + &quot;A&quot; + &quot; is empty -- cannot remove item&quot;));</span>
+		}
+		// * @throws VendingMachineException and if the code is invalid
+
+		try {
+<span class="nc" id="L118">			vm3.removeItem(&quot;Z&quot;);</span>
+<span class="pc" id="L119">		} catch (Exception e) {</span>
+<span class="fc" id="L120">			assertTrue(e.getMessage().equals(&quot;Invalid code for vending machine item&quot;));</span>
+		}
+
+<span class="fc" id="L123">	}</span>
+	/**
+	 * This tests when the money inserted is 0, when the balence is negative, and that it works corectly
+	 */
+	@Test
+	public void testInsertMoney() {
+<span class="fc" id="L129">		vm.balance = 0;</span>
+<span class="fc" id="L130">		vm.insertMoney(30);</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">		assertTrue(vm.balance == 30);</span>
+<span class="fc" id="L132">		vm1.balance = 40;</span>
+<span class="fc" id="L133">		vm1.insertMoney(70);</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">		assertTrue(vm1.getBalance() == 110);</span>
+<span class="fc" id="L135">		vm3.balance = -40;</span>
+		try {
+<span class="fc" id="L137">			vm3.insertMoney(4);</span>
+
+<span class="pc" id="L139">		} catch (Exception e) {</span>
+<span class="nc" id="L140">			assertTrue(e.getMessage().equals(&quot;Invalid amount.  Amount must be &gt;= 0&quot;));</span>
+		}
+<span class="fc" id="L142">		vm4.balance = 70;</span>
+<span class="fc" id="L143">		vm4.insertMoney(0);</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">		assertTrue(vm4.balance == 70);</span>
+		try{
+<span class="nc" id="L146">		vm3.insertMoney(-60);</span>
+<span class="nc" id="L147">		}</span>
+<span class="fc" id="L148">		catch(Exception e){</span>
+			
+		}
+		
+
+<span class="fc" id="L153">	}</span>
+/**
+ * Thiis tests when the balence is greater, equal to and lower than 0 before method starts
+ * 
+ * It also tests that the balence is what it was before
+ */
+	@Test
+	public void testGetBalance() {
+		// pre &gt;
+<span class="fc" id="L162">		vm.balance = 90;</span>
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">		assertTrue(vm.getBalance() == 90);</span>
+		// pre=
+<span class="fc" id="L165">		vm1.balance = 0;</span>
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">		assertTrue(vm1.getBalance() == 0);</span>
+		// post=
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">		assertTrue(vm1.balance == 0);</span>
+		// post&gt;
+<span class="fc" id="L170">		vm4.balance = 89;</span>
+<span class="fc" id="L171">		vm4.getBalance();</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">		assertTrue(vm4.balance == 89);</span>
+		// pre&lt;
+<span class="fc" id="L174">		vm3.balance = -5;</span>
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">		assertTrue(vm3.getBalance() == 0);</span>
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">		assertTrue(vm3.balance == 0);</span>
+<span class="fc" id="L177">	}</span>
+/**
+ * This tests if the code returns false if not enough money and if it is an empty slot. It tests
+ *  if it returns true for if there is enough money. It tests if the amount of money is subtracted from the balence. It also tests that the 
+ *  the method works.. 
+ */
+	@Test
+	public void testMakePurchase() {
+
+		// Also returns false if the code is for an empty slot.
+<span class="fc" id="L187">		assertFalse(vm.makePurchase(&quot;C&quot;));</span>
+		// Returns false if not enough money is put
+		// * into the vending machine to make the purchase.
+<span class="fc" id="L190">		vm3.balance = 999;</span>
+<span class="fc" id="L191">		vm3.addItem(item1, &quot;C&quot;);</span>
+<span class="fc" id="L192">		assertFalse(vm3.makePurchase(&quot;C&quot;));</span>
+		// * @return Returns true if there is enough money to make the purchase.
+
+<span class="fc" id="L195">		vm1.balance = 10;</span>
+<span class="fc" id="L196">		vm1.addItem(item3, &quot;D&quot;);</span>
+<span class="fc" id="L197">		assertTrue(vm1.makePurchase(&quot;D&quot;));</span>
+
+		// Postcondition: The amount of the item is subtracted from the balance
+<span class="pc bpc" id="L200" title="1 of 2 branches missed.">		assertTrue(vm1.balance == 5);</span>
+		// Precondition: balance &gt;= 0
+<span class="fc" id="L202">		vm4.balance = -50;</span>
+<span class="fc" id="L203">		vm4.addItem(item3, &quot;B&quot;);</span>
+<span class="fc" id="L204">		assertFalse(vm4.makePurchase(&quot;B&quot;));</span>
+<span class="fc" id="L205">		vm.balance = 0;</span>
+<span class="fc" id="L206">		vm.addItem(item3, &quot;B&quot;);</span>
+<span class="fc" id="L207">		assertFalse(vm.makePurchase(&quot;B&quot;));</span>
+<span class="fc" id="L208">		vm2.balance = 1010;</span>
+<span class="fc" id="L209">		vm2.addItem(item3, &quot;B&quot;);</span>
+<span class="fc" id="L210">		assertTrue(vm2.makePurchase(&quot;B&quot;));</span>
+
+<span class="fc" id="L212">	}</span>
+
+	@Test
+	/**
+	 * This test tests if return change works if the balence is negative, zero or positive. It also tests if the balence
+	 * is zero afterwards.
+	 */
+	public void testReturnChange() {
+		// =0
+<span class="pc bpc" id="L221" title="1 of 2 branches missed.">		assertTrue(vm.returnChange() == 0);</span>
+<span class="fc" id="L222">		vm1.insertMoney(20);</span>
+		// &gt;0
+<span class="pc bpc" id="L224" title="1 of 2 branches missed.">		assertTrue(vm1.returnChange() == 20);</span>
+<span class="fc" id="L225">		vm2.balance = -20;</span>
+		// &lt;0
+<span class="pc bpc" id="L227" title="1 of 2 branches missed.">		assertTrue(vm2.returnChange() == -20);</span>
+		// post=0
+<span class="pc bpc" id="L229" title="1 of 2 branches missed.">		assertTrue(vm1.balance == 0);</span>
+
+<span class="fc" id="L231">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>VendingMachineTests (Mar 7, 2018 9:13:07 AM)</div></body></html>
